@@ -9,11 +9,6 @@ row_1 = [' ', ' ', ' ']
 row_2 = [' ', ' ', ' ']
 row_3 = [' ', ' ', ' ']
 
-letters_value = {
-    "a": 1,
-    "b": 2,
-    "c": 3
-}
 
 class Player:
     def __init__(self, name):
