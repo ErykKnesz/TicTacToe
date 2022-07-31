@@ -9,6 +9,11 @@ row_1 = [' ', ' ', ' ']
 row_2 = [' ', ' ', ' ']
 row_3 = [' ', ' ', ' ']
 
+letters_value = {
+    "a": 1,
+    "b": 2,
+    "c": 3
+}
 
 class Player:
     def __init__(self, name):
@@ -64,11 +69,25 @@ class TicTacToeGame:
         return False
 
     def is_winner(self):
-        col_1 = [row_1[0], row_2[0], row_3[0]]
-        col_2 = [row_1[1], row_2[1], row_3[1]]
-        col_3 = [row_1[2], row_2[2], row_3[2]]
-        slant_1 = [row_1[0], row_2[1], row_3[2]]
-        slant_2 = [row_1[2], row_2[1], row_3[0]]
+        col_1 = [row[0] for row in self.board]
+        col_2 = [row[1] for row in self.board]
+        col_3 = [row[2] for row in self.board]
+        slant_1 = []
+        slant_2 = []
+        last_item = len(self.board) - 1
+        for i in range(len(self.board)):
+            try:
+                a = self.board[i][i]
+                b = self.board[i + 1][i + 1]
+                c = self.board[i + 2][i + 2]
+                slant_1.extend([a, b, c])
+                x = self.board[last_item][i]
+                y = self.board[last_item - 1][i + 1]
+                z = self.board[last_item - 2][i + 2]
+                slant_2.extend([x, y, z])
+            except IndexError:
+                pass
+
         return any([all(x == self.current_player.name for x in row_1),
                    all(x == self.current_player.name for x in row_2),
                    all(x == self.current_player.name for x in row_3),
